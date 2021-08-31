@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+<head>
+  <script>
+
+    function getErrorOuputStr(errMsg = '') {
+      return `<h3 style="color: red">${errMsg}</h3>`
+    }
+
+    async function submitForm(evt) {
+      evt.preventDefault();
+      const outputElem = document.querySelector('#result');
+      const inputElem = document.querySelector('#reverse');
+      const value = inputElem.value;
+
+      try {
+
+        outputElem.innerHTML = `<h4 style="color: #c0c0c0">Loading...</h4>`;
+        const response = await fetch('http://localhost:3005/data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain'
+          },
+          body: value
+        });
+
+        if (response.ok) {
+          const returnedText = await response.text();
+
+          outputElem.innerHTML = `<h2>${returnedText}</h2>`;
+
+        } else {
+          outputElem.innerHTML = getErrorOuputStr('There was a request error!');
+        }
+
+
+      } catch (e) {
+        outputElem.innerHTML = getErrorOuputStr('Unknown error! (Is the server up and running?)');
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h2>Infuse - Simple Web Server</h2>
+  <form onsubmit="submitForm(event)">
+    <p>
+      Type some text to get it reversed:
+      <input type="text" value="" id="reverse">
+    </p>
+    <button type="submit">Submit!</button>
+  </form>
+  <div id="result">
+
+  </div>
+</body>
+
+</html>

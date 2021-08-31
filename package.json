@@ -1,0 +1,23 @@
+{
+  "name": "infuse-simple-web-server",
+  "version": "1.0.0",
+  "description": "Simple web server for Infuse tech assignment",
+  "main": "index.js",
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Infuse",
+    "web",
+    "server"
+  ],
+  "author": "Remy Barros",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
